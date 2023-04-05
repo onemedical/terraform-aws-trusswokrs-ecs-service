@@ -1,6 +1,6 @@
 ## Story
 
-[story](https://onemedical.atlassian.net/browse/INFRA-123)
+[story](https://onemedical.atlassian.net/browse/INFRA-)
 
 ## Description
 
