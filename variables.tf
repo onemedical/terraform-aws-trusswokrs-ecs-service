@@ -257,3 +257,9 @@ variable "task_definition_tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "ephemeral_storage_size_in_gib" {
+  description = "The size of the ephemeral storage volume. Defaults to 21GB."
+  type        = number
+  default     = 21
+}

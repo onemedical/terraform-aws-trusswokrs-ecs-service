@@ -449,6 +449,10 @@ resource "aws_ecs_task_definition" "main" {
 
   container_definitions = var.container_definitions == "" ? local.default_container_definitions : var.container_definitions
 
+  ephemeral_storage {
+    size_in_gib = var.ephemeral_storage_size_in_gib
+  }
+
   dynamic "volume" {
     for_each = var.container_volumes
     content {
