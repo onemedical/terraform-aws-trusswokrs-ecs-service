@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   pre-commit:
     docker:
-      - image: ${AWS_ECR_ACCOUNT_URL}/circleci-terraform:main-1683461053-tf1.0
+      - image: ${AWS_ECR_ACCOUNT_URL}/circleci-terraform:dev-1686175761-tf1.0
         aws_auth:
           aws_access_key_id: $ECR_AWS_ACCESS_KEY_ID
           aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY
