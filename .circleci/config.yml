@@ -16,6 +16,7 @@ jobs:
           name: Run pre-commit tests
           command: |
             terraform init
+            go version
             pre-commit run -a
       - save_cache:
           key: pre-commit-dot-cache-{{ checksum ".pre-commit-config.yaml" }}
