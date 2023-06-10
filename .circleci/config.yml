@@ -32,7 +32,7 @@ jobs:
             - ~/go/pkg/mod
   pre-commit:
     docker:
-      - image: ${AWS_ECR_ACCOUNT_URL}/circleci-terraform:1.0
+      - image: ${AWS_ECR_ACCOUNT_URL}/circleci-terraform:tf1.0
         aws_auth:
           aws_access_key_id: $ECR_AWS_ACCESS_KEY_ID
           aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY
@@ -46,7 +46,7 @@ jobs:
           command: |
             terraform init
             go version
-            pre-commit run -a
+            pre-commit run -a --show-diff-on-failure
       - save_cache:
           key: pre-commit-dot-cache-{{ checksum ".pre-commit-config.yaml" }}
           paths:
