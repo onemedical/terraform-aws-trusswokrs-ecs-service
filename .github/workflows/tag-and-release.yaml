@@ -20,7 +20,7 @@ permissions:
 
 
 jobs:
-  # Call the reusable workflow.
+  # Call the reusable workflow locally
   call-workflow:
     name: Call Workflow
-    uses: terraform-aws-trussworks-ecs-service/.github/workflows/reusable-tag-and-release-terraform-module.yaml@main
+    uses: ./.github/workflows/reusable-tag-and-release-terraform-module.yaml@main
