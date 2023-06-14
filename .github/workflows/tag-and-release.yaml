@@ -1,7 +1,4 @@
-# onemedical/<repo>/.github/workflows/tag-and-release-terraform-module.yaml
-#
-# This is the workflow for distribution to repositories across the organization.
-# It will call the reusable Tag and Release Terraform Module workflow,
+# This is the workflow that calls the reusable Tag and Release Terraform Module workflow,
 # which will create a new tag based on a value in version file and create a GitHub release.
 ---
 name: 🏷 Tag and Release
@@ -22,5 +19,8 @@ permissions:
 jobs:
   # Call the reusable workflow locally
   call-workflow:
-    name: Call Workflow
-    uses: ./.github/workflows/reusable-tag-and-release-terraform-module.yaml@main
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.4 # Necessary to access local action
+      - name: Call tag and release terraform module workflow
+        uses: ./.github/workflows/reusable-tag-and-release-terraform-module.yaml
