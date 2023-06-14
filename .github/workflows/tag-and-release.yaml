@@ -23,4 +23,4 @@ jobs:
   # Call the reusable workflow.
   call-workflow:
     name: Call Workflow
-    uses: onemedical/github-reusable-workflows/.github/workflows/reusable-tag-and-release-terraform-module.yaml@main
+    uses: terraform-aws-trussworks-ecs-service/github-reusable-workflows/.github/workflows/reusable-tag-and-release-terraform-module.yaml@main
