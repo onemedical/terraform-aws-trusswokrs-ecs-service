@@ -18,7 +18,7 @@ permissions:
 
 jobs:
   # Call the reusable workflow locally
-  call-workflow:
+  tag-and-release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3 # Necessary to access local action
