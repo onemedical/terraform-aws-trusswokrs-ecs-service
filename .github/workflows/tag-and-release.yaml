@@ -1,5 +1,4 @@
-# This is the workflow that calls the reusable Tag and Release Terraform Module workflow,
-# which will create a new tag based on a value in version file and create a GitHub release.
+# Create a new GitHub tag and release based on a value in version file.
 ---
 name: 🏷 Tag and Release
 
@@ -17,7 +16,6 @@ permissions:
 
 
 jobs:
-  # Call the reusable workflow locally
   tag-and-release:
     runs-on: ubuntu-latest
     steps:
