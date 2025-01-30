@@ -105,6 +105,7 @@ resource "aws_security_group" "ecs_allow_http" {
 
 }
 
+#tfsec:ignore:aws-ec2-add-description-to-security-group-rule tfsec:ignore:aws-ec2-no-public-ingress-sgr
 resource "aws_security_group_rule" "ecs_allow_http" {
   count = length(local.hello_world_container_ports)
 

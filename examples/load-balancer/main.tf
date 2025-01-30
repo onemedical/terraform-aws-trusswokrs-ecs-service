@@ -71,6 +71,7 @@ resource "aws_kms_key" "main" {
 # ECS Cluster
 #
 
+#tfsec:ignore:aws-ecs-enable-container-insight
 resource "aws_ecs_cluster" "main" {
   name = var.test_name
 }
@@ -78,6 +79,7 @@ resource "aws_ecs_cluster" "main" {
 #
 # ALB
 #
+#tfsec:ignore:aws-elb-alb-not-public
 resource "aws_lb" "main" {
   name               = var.test_name
   internal           = false
@@ -124,11 +126,13 @@ resource "aws_lb_target_group" "http" {
   depends_on = [aws_lb.main]
 }
 
+#tfsec:ignore:aws-ec2-add-description-to-security-group
 resource "aws_security_group" "lb_sg" {
   name   = "lb-${var.test_name}"
   vpc_id = module.vpc.vpc_id
 }
 
+#tfsec:ignore:aws-ec2-add-description-to-security-group-rule tfsec:ignore:aws-ec2-no-public-egress-sgr
 resource "aws_security_group_rule" "app_lb_allow_outbound" {
   security_group_id = aws_security_group.lb_sg.id
 
@@ -139,6 +143,7 @@ resource "aws_security_group_rule" "app_lb_allow_outbound" {
   cidr_blocks = ["0.0.0.0/0"]
 }
 
+#tfsec:ignore:aws-ec2-add-description-to-security-group-rule tfsec:ignore:aws-ec2-no-public-ingress-sgr
 resource "aws_security_group_rule" "app_lb_allow_all_http" {
   count             = length(local.hello_world_container_ports)
   security_group_id = aws_security_group.lb_sg.id
