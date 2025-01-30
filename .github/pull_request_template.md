@@ -1,4 +1,4 @@
-<!-- markdownlint-disable MD041 -->
+<!-- markdownlint-disable MD002 MD041 -->
 ## Story
 
 [story](https://onemedical.atlassian.net/browse/INFRA-)

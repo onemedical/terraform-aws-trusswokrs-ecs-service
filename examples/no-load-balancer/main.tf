@@ -69,6 +69,7 @@ resource "aws_kms_key" "main" {
 # ECS Cluster
 #
 
+#tfsec:ignore:aws-ecs-enable-container-insight
 resource "aws_ecs_cluster" "main" {
   name = var.test_name
 }
