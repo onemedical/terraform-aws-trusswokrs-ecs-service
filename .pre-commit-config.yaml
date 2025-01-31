@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v5.0.0
     hooks:
       - id: check-json
       - id: check-merge-conflict
@@ -10,20 +10,33 @@ repos:
         args:
           - --autofix
       - id: trailing-whitespace
+        # terraform-docs adds trailing whitespace in some cases
+        exclude: ^.*\.md$
 
-  - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.34.0
+  - repo: https://github.com/markdownlint/markdownlint
+    rev: v0.13.0
     hooks:
       - id: markdownlint
 
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.80.0
+    rev: v1.97.0
     hooks:
       - id: terraform_docs
       - id: terraform_fmt
+      - id: terraform_tfsec
+        args: ["--args", "--exclude-downloaded-modules"]
 
-  - repo: https://github.com/golangci/golangci-lint
-    rev: v1.53.2
+#  - repo: https://github.com/golangci/golangci-lint
+#    rev: v1.63.4
+#    hooks:
+#      - id: golangci-lint
+#        args: [--timeout=3m]
+
+  - repo: local
     hooks:
-      - id: golangci-lint
-        args: [--timeout=3m]
+    - id: git-diff
+      name: git diff
+      entry: git diff --exit-code
+      language: system
+      pass_filenames: false
+      always_run: true

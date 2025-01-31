@@ -69,6 +69,7 @@ resource "aws_kms_key" "main" {
 # ECS Cluster
 #
 
+#tfsec:ignore:aws-ecs-enable-container-insight
 resource "aws_ecs_cluster" "main" {
   name = var.test_name
 }
@@ -105,6 +106,7 @@ resource "aws_security_group" "ecs_allow_http" {
 
 }
 
+#tfsec:ignore:aws-ec2-add-description-to-security-group-rule tfsec:ignore:aws-ec2-no-public-ingress-sgr
 resource "aws_security_group_rule" "ecs_allow_http" {
   count = length(local.hello_world_container_ports)
 

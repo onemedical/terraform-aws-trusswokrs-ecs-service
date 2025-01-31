@@ -159,6 +159,7 @@ resource "aws_security_group" "ecs_sg" {
   }
 }
 
+#tfsec:ignore:aws-ec2-no-public-egress-sgr
 resource "aws_security_group_rule" "app_ecs_allow_outbound" {
   count             = var.manage_ecs_security_group ? 1 : 0
   description       = "All outbound"
@@ -308,6 +309,8 @@ resource "aws_iam_role_policy" "instance_role_policy" {
 # IAM - task
 #
 
+data "aws_caller_identity" "current" {}
+
 data "aws_iam_policy_document" "ecs_assume_role_policy" {
   statement {
     actions = ["sts:AssumeRole"]
@@ -316,9 +319,16 @@ data "aws_iam_policy_document" "ecs_assume_role_policy" {
       type        = "Service"
       identifiers = ["ecs-tasks.amazonaws.com"]
     }
+
+    condition {
+      test     = "StringEquals"
+      variable = "aws:SourceAccount"
+      values   = [data.aws_caller_identity.current.account_id]
+    }
   }
 }
 
+#tfsec:ignore:aws-iam-no-policy-wildcards
 data "aws_iam_policy_document" "task_execution_role_policy_doc" {
   statement {
     actions = [
@@ -378,6 +388,7 @@ resource "aws_iam_role_policy" "task_execution_role_policy" {
 # ECS Exec
 #
 
+#tfsec:ignore:aws-iam-no-policy-wildcards
 data "aws_iam_policy_document" "task_role_ecs_exec" {
   count = var.ecs_exec_enable ? 1 : 0
   statement {
